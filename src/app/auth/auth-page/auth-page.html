@@ -1,0 +1,132 @@
+<div class="auth-shell">
+  <div class="auth-card">
+    <!-- Brand panel -->
+    <div class="brand-panel">
+      <div class="brand-mark">
+        <span class="brand-name">Gruhasti</span><span class="brand-tld">.vip</span>
+      </div>
+
+      <div class="brand-copy">
+        <h1>One login. Every Gruhasti store.</h1>
+        <p>Sign in once to shop Shuddha, Pen2Paper, and everything else on Gruhasti.vip — all your orders, one account.</p>
+      </div>
+
+      <ul class="feature-list">
+        <li><i class="pi pi-check-circle"></i> Fresh, stone-milled flour</li>
+        <li><i class="pi pi-check-circle"></i> Curated stationery &amp; art supplies</li>
+        <li><i class="pi pi-check-circle"></i> One account, every order in one place</li>
+      </ul>
+    </div>
+
+    <!-- Form panel -->
+    <div class="form-panel">
+      <div class="form-inner">
+        <div class="logo-tile">G</div>
+
+        @if (view !== 'forgot') {
+          <div class="segmented">
+            <div class="segmented-indicator" [class.right]="view === 'register'"></div>
+            <button type="button" (click)="goLogin()" [class.active]="view === 'login'">Sign in</button>
+            <button type="button" (click)="goRegister()" [class.active]="view === 'register'">Register</button>
+          </div>
+        }
+
+        @if (errorMessage) {
+          <div class="error-banner">{{ errorMessage }}</div>
+        }
+
+        <!-- LOGIN -->
+        @if (view === 'login') {
+          <div class="view-block">
+            <h2>Good to see you again</h2>
+            <p class="subtext">Let's get your essentials sorted.</p>
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+              <div class="field">
+                <label>Email</label>
+                <input type="text" formControlName="email" placeholder="you@example.com" autocomplete="email" />
+              </div>
+              <div class="field">
+                <div class="field-label-row">
+                  <label>Password</label>
+                  <span class="link-btn" (click)="togglePassword()">{{ passwordLabel }}</span>
+                </div>
+                <input [type]="passwordType" formControlName="password" placeholder="••••••••" autocomplete="current-password" />
+                <div class="align-right">
+                  <span class="link-btn" (click)="goForgot()">Forgot password?</span>
+                </div>
+              </div>
+              <button type="submit" class="btn-primary" [disabled]="loginForm.invalid || loading">
+                {{ loading ? 'Signing in…' : 'Sign in' }}
+              </button>
+              <div class="divider"><span>or</span></div>
+              <button type="button" class="btn-secondary" (click)="showOtpHint()">Continue with mobile OTP</button>
+              @if (otpHint) {
+                <p class="hint-text">Mobile OTP sign-in is coming soon.</p>
+              }
+            </form>
+          </div>
+        }
+
+        <!-- REGISTER -->
+        @if (view === 'register') {
+          <div class="view-block">
+            <h2>Create your account</h2>
+            <p class="subtext">Join Gruhasti.vip to start shopping.</p>
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+              <div class="field">
+                <label>Full name</label>
+                <input type="text" formControlName="fullName" placeholder="Ananya Sharma" autocomplete="name" />
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label>Flat / House</label>
+                  <input type="text" formControlName="flatNumber" placeholder="B-1204" />
+                </div>
+                <div class="field">
+                  <label>Mobile</label>
+                  <input type="tel" formControlName="mobile" placeholder="+91 98765…" autocomplete="tel" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Email</label>
+                <input type="email" formControlName="email" placeholder="you@example.com" autocomplete="email" />
+              </div>
+              <div class="field">
+                <div class="field-label-row">
+                  <label>Create password</label>
+                  <span class="link-btn" (click)="togglePassword()">{{ passwordLabel }}</span>
+                </div>
+                <input [type]="passwordType" formControlName="password" placeholder="Minimum 8 characters" autocomplete="new-password" />
+              </div>
+              <button type="submit" class="btn-primary" [disabled]="registerForm.invalid || loading">
+                {{ loading ? 'Creating account…' : 'Create account' }}
+              </button>
+              <p class="terms-text">By continuing you agree to our <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a>.</p>
+            </form>
+          </div>
+        }
+
+        <!-- FORGOT PASSWORD -->
+        @if (view === 'forgot') {
+          <div class="view-block">
+            <span class="link-btn back-link" (click)="goLogin()">← Back to sign in</span>
+            <h2>Reset your password</h2>
+            @if (!forgotSubmitted) {
+              <p class="subtext">Enter your registered email and we'll send you a reset link.</p>
+              <form [formGroup]="forgotForm" (ngSubmit)="onForgotSubmit()">
+                <div class="field">
+                  <label>Email or mobile</label>
+                  <input type="text" formControlName="identifier" placeholder="you@example.com" />
+                </div>
+                <button type="submit" class="btn-primary" [disabled]="forgotForm.invalid">Send reset link</button>
+              </form>
+            } @else {
+              <p class="subtext">If that account exists, we've sent reset instructions to it. Check your inbox shortly.</p>
+              <button type="button" class="btn-primary" (click)="goLogin()">Back to sign in</button>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

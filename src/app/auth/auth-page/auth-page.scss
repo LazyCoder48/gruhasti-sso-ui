@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap');
+
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: 'Hanken Grotesk', sans-serif;
+}
+
+.auth-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  background: #E7E2DA;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 1040px;
+  display: flex;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 40px 90px -34px rgba(150, 70, 40, 0.4);
+  border: 1px solid #EAD8C8;
+  background: #FBEEE3;
+}
+
+/* Brand panel */
+.brand-panel {
+  width: 48%;
+  position: relative;
+  padding: 52px;
+  background: radial-gradient(130% 120% at 20% 0%, #E07C4E, #C2542C 60%, #A5431F);
+  color: #FFF3EC;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+
+  .brand-mark {
+    display: flex;
+    align-items: flex-start;
+    gap: 2px;
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 30px;
+      color: #FFF3EC;
+    }
+
+    .brand-tld {
+      font: 700 12px 'Hanken Grotesk';
+      color: #FBD9C7;
+      margin-top: 4px;
+    }
+  }
+
+  .brand-copy {
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 38px;
+      line-height: 1.1;
+      color: #FFF7F1;
+      margin: 0 0 14px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #FBDDCE;
+      margin: 0;
+      max-width: 38ch;
+    }
+  }
+
+  .feature-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #FFF3EC;
+
+      i {
+        color: #FBD9C7;
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+/* Form panel */
+.form-panel {
+  width: 52%;
+  background: #FBEEE3;
+  padding: 48px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-inner {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.logo-tile {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  background: linear-gradient(150deg, #E88A5E, #D9663B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #FFF3EC;
+  box-shadow: 0 10px 22px -8px rgba(200, 90, 50, 0.5);
+}
+
+.segmented {
+  position: relative;
+  display: flex;
+  background: #F3E0D3;
+  border-radius: 14px;
+  padding: 5px;
+  margin-bottom: 24px;
+  max-width: 300px;
+
+  .segmented-indicator {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    width: calc(50% - 5px);
+    background: #FBF3EE;
+    border: 1px solid #F0DCCB;
+    border-radius: 10px;
+    box-shadow: 0 2px 7px rgba(150, 70, 40, 0.13);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.right {
+      transform: translateX(100%);
+    }
+  }
+
+  button {
+    position: relative;
+    flex: 1;
+    padding: 9px;
+    border: none;
+    background: transparent;
+    font: 700 13px 'Hanken Grotesk';
+    color: #5E2A18;
+    cursor: pointer;
+  }
+}
+
+.error-banner {
+  background: #FBE3DB;
+  border: 1px solid #EFC0AC;
+  color: #9A3E1E;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.view-block {
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 28px;
+    color: #5E2A18;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  .subtext {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #A0674A;
+    margin: 8px 0 22px;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font: 700 10px 'Hanken Grotesk';
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #BF8567;
+  }
+
+  input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1.5px solid #F0DACA;
+    border-radius: 15px;
+    background: #FFF7F1;
+    font: 400 15px 'Hanken Grotesk';
+    color: #5E2A18;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+
+    &::placeholder {
+      color: #C6A491;
+    }
+
+    &:focus {
+      border-color: #D9663B;
+      box-shadow: 0 0 0 3px rgba(217, 102, 59, 0.14);
+    }
+  }
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.link-btn {
+  font: 600 12px 'Hanken Grotesk';
+  color: #C96A3C;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 999px;
+  background: #D9663B;
+  color: #FFF3EC;
+  font: 700 14px 'Hanken Grotesk';
+  cursor: pointer;
+  box-shadow: 0 10px 20px -8px rgba(200, 90, 50, 0.55);
+  transition: background 0.15s;
+
+  &:hover:not(:disabled) {
+    background: #C25730;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 14px;
+  border: 1.5px solid #EAD3C4;
+  border-radius: 999px;
+  background: transparent;
+  color: #7A4A38;
+  font: 600 14px 'Hanken Grotesk';
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+
+  &:hover {
+    border-color: #D9663B;
+    background: #FBEFE6;
+  }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #F0DACA;
+  }
+
+  span {
+    font: 600 10px 'Hanken Grotesk';
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #C6A491;
+  }
+}
+
+.hint-text {
+  text-align: center;
+  font-size: 12px;
+  color: #A0674A;
+  margin: 4px 0 0;
+}
+
+.terms-text {
+  text-align: center;
+  font: 400 11px/1.5 'Hanken Grotesk';
+  color: #A0674A;
+  margin: 4px 0 0;
+
+  a {
+    color: #C96A3C;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .auth-card {
+    flex-direction: column;
+    max-width: 460px;
+  }
+
+  .brand-panel,
+  .form-panel {
+    width: 100%;
+  }
+
+  .brand-panel {
+    padding: 36px 32px;
+
+    .feature-list {
+      display: none;
+    }
+  }
+
+  .form-panel {
+    padding: 36px 32px;
+  }
+}

@@ -1,0 +1,34 @@
+<div class="dashboard-wrapper">
+  <p-card class="dashboard-card">
+    <ng-template pTemplate="header">
+      <div class="dashboard-header">
+        <h1>Welcome, {{ auth.user()?.firstName }}!</h1>
+        <p>You are signed in to <strong>Gruhasti SSO</strong></p>
+      </div>
+    </ng-template>
+
+    <div class="user-info">
+      <div class="info-row">
+        <span class="label">Email</span>
+        <span>{{ auth.user()?.email }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Name</span>
+        <span>{{ auth.user()?.firstName }} {{ auth.user()?.lastName }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Roles</span>
+        <div class="roles">
+          @for (role of auth.user()?.roles; track role) {
+            <p-tag [value]="role" [severity]="role === 'ADMIN' ? 'warn' : 'info'" />
+          }
+        </div>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <p-button label="Sign out" icon="pi pi-sign-out" severity="secondary"
+                (onClick)="auth.logout()" />
+    </ng-template>
+  </p-card>
+</div>
