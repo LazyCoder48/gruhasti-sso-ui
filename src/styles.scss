@@ -1,4 +1,87 @@
 @import 'primeicons/primeicons.css';
+@import url('https://fonts.googleapis.com/css2?family=Schoolbell&family=Karla:wght@400;500;600;700;800&display=swap');
+
+/* Gruhasti · "Mint & chalkboard" theme tokens
+   Light = band 05 · Dark = band 13 (Claude Design: "Kid-focused theme design" project)
+   Dark mode activates via the .p2p-dark class on <html> (toggled by ThemeService). */
+:root {
+  --p2p-font-display: 'Schoolbell', cursive;
+  --p2p-font-body: 'Karla', sans-serif;
+
+  --p2p-bg: #EFEDE4;
+  --p2p-surface: #FFFFFF;
+  --p2p-surface-alt: #E2F1E8;
+  --p2p-surface-hover: #EAF6EF;
+  --p2p-surface-sunken: #FBFEFC;
+  --p2p-border: #CDE5D6;
+  --p2p-border-soft: #E8E6DC;
+
+  --p2p-text: #26262E;
+  --p2p-text-body: #3F5C50;
+  --p2p-text-muted: #4F6B5D;
+  --p2p-text-faint: #6C8778;
+
+  --p2p-primary: #2E9E74;
+  --p2p-primary-rgb: 46, 158, 116;
+  --p2p-primary-hover: #1F6F4F;
+  --p2p-primary-contrast: #FFFFFF;
+  --p2p-primary-tint: #E2F1E8;
+  --p2p-primary-tint-border: #C4E4D8;
+
+  --p2p-accent: #FFAB76;
+  --p2p-accent-rgb: 255, 171, 118;
+  --p2p-accent-text: #6E3A12;
+  --p2p-accent-tint: #FFF3EC;
+
+  --p2p-success: #5C8A3C;
+  --p2p-success-dot: #5C8A3C;
+  --p2p-warning: #B07A1E;
+  --p2p-warning-dot: #C98A2A;
+  --p2p-danger: #B3261E;
+  --p2p-danger-tint: #FBEDED;
+
+  --p2p-brand-gradient: linear-gradient(150deg, #3B7A63, #234D3D);
+  --p2p-inverse-bg: #1E3428;
+  --p2p-inverse-text: #E5F4EB;
+}
+
+.p2p-dark {
+  --p2p-bg: #16281F;
+  --p2p-surface: #1E3428;
+  --p2p-surface-alt: #22392C;
+  --p2p-surface-hover: #2F4A3C;
+  --p2p-surface-sunken: #0F1F18;
+  --p2p-border: #2F4A3C;
+  --p2p-border-soft: #22392C;
+
+  --p2p-text: #E5F4EB;
+  --p2p-text-body: #C9DFD2;
+  --p2p-text-muted: #96B3A4;
+  --p2p-text-faint: #7C9789;
+
+  --p2p-primary: #4FC094;
+  --p2p-primary-rgb: 79, 192, 148;
+  --p2p-primary-hover: #68C9A3;
+  --p2p-primary-contrast: #16281F;
+  --p2p-primary-tint: rgba(79, 192, 148, 0.16);
+  --p2p-primary-tint-border: rgba(79, 192, 148, 0.32);
+
+  --p2p-accent: #FFAB76;
+  --p2p-accent-rgb: 255, 171, 118;
+  --p2p-accent-text: #FFD9C1;
+  --p2p-accent-tint: rgba(255, 171, 118, 0.16);
+
+  --p2p-success: #7FCB7A;
+  --p2p-success-dot: #7FCB7A;
+  --p2p-warning: #E0A756;
+  --p2p-warning-dot: #E0A756;
+  --p2p-danger: #F08B84;
+  --p2p-danger-tint: rgba(240, 139, 132, 0.14);
+
+  --p2p-brand-gradient: linear-gradient(150deg, #2E9E74, #12412E);
+  --p2p-inverse-bg: #0F1F18;
+  --p2p-inverse-text: #E5F4EB;
+}
 
 * {
   box-sizing: border-box;
@@ -7,6 +90,11 @@
 }
 
 body {
-  font-family: var(--p-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
-  background-color: #f8f9fa;
+  font-family: var(--p2p-font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--p2p-bg);
+  transition: background-color 0.2s ease;
+}
+
+h1, h2, h3, .p2p-display {
+  font-family: var(--p2p-font-display);
 }

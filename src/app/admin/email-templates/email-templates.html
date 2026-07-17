@@ -1,0 +1,121 @@
+<div class="admin-shell">
+  <div class="admin-topbar">
+    <a routerLink="/dashboard" class="back-link"><i class="pi pi-arrow-left"></i> Back to dashboard</a>
+    <button
+      type="button"
+      class="theme-toggle"
+      [title]="theme.dark() ? 'Switch to light mode' : 'Switch to dark mode'"
+      (click)="theme.toggle()"
+    >
+      <i [class]="theme.dark() ? 'pi pi-sun' : 'pi pi-moon'"></i>
+    </button>
+  </div>
+
+  <div class="admin-body">
+    <h1>Email templates</h1>
+    <p class="subtitle">
+      Edit the copy sent to customers for registration, sign-in alerts, password resets, and profile
+      changes. Changes apply to the next email sent — no code or template changes needed.
+    </p>
+
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    @if (loading()) {
+      <p class="hint">Loading templates…</p>
+    } @else {
+      @for (card of templates(); track card.type) {
+        <div class="template-card">
+          <h2>{{ card.title }}</h2>
+          <p class="card-hint">{{ card.hint }}</p>
+
+          <label>
+            Subject
+            <input
+              type="text"
+              [ngModel]="card.draft.subject"
+              (ngModelChange)="updateField(card.type, 'subject', $event)"
+              [name]="'subject-' + card.type"
+            />
+          </label>
+          <label>
+            Heading
+            <input
+              type="text"
+              [ngModel]="card.draft.heading"
+              (ngModelChange)="updateField(card.type, 'heading', $event)"
+              [name]="'heading-' + card.type"
+            />
+          </label>
+          <label>
+            Body text
+            <textarea
+              rows="3"
+              [ngModel]="card.draft.bodyText"
+              (ngModelChange)="updateField(card.type, 'bodyText', $event)"
+              [name]="'body-' + card.type"
+            ></textarea>
+          </label>
+          <div class="field-row">
+            <label>
+              Button label
+              <input
+                type="text"
+                [ngModel]="card.draft.buttonLabel"
+                (ngModelChange)="updateField(card.type, 'buttonLabel', $event)"
+                [name]="'buttonLabel-' + card.type"
+              />
+            </label>
+            <label>
+              Button URL
+              <input
+                type="text"
+                [ngModel]="card.draft.buttonUrl"
+                (ngModelChange)="updateField(card.type, 'buttonUrl', $event)"
+                [name]="'buttonUrl-' + card.type"
+              />
+            </label>
+          </div>
+
+          <div class="header-image-field">
+            <span class="header-image-label">Header image</span>
+            @if (card.headerImagePresent) {
+              <div class="header-image-preview">
+                <img [src]="headerImageUrl(card.type, card.headerImageCacheBust)" alt="Header banner preview" />
+                <p-button
+                  label="Remove image"
+                  severity="danger"
+                  [text]="true"
+                  [loading]="card.uploadingHeaderImage"
+                  [disabled]="card.uploadingHeaderImage"
+                  (onClick)="removeHeaderImage(card.type)"
+                />
+              </div>
+            } @else {
+              <p class="hint">No header image — using the default Gruhasti logo header.</p>
+            }
+            <input
+              type="file"
+              accept="image/*"
+              [disabled]="card.uploadingHeaderImage"
+              (change)="onHeaderImageSelected(card.type, $event)"
+            />
+          </div>
+
+          <div class="form-actions">
+            @if (card.saved) {
+              <span class="saved-hint">Saved</span>
+            }
+            <p-button
+              [label]="card.saving ? 'Saving…' : 'Save'"
+              [loading]="card.saving"
+              [disabled]="card.saving"
+              (onClick)="save(card.type)"
+            />
+          </div>
+        </div>
+      }
+    }
+  </div>
+</div>

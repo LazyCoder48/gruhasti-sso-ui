@@ -1,4 +1,12 @@
 <div class="auth-shell">
+  <button
+    type="button"
+    class="theme-toggle"
+    [title]="theme.dark() ? 'Switch to light mode' : 'Switch to dark mode'"
+    (click)="theme.toggle()"
+  >
+    <i [class]="theme.dark() ? 'pi pi-sun' : 'pi pi-moon'"></i>
+  </button>
   <div class="auth-card">
     <!-- Brand panel -->
     <div class="brand-panel">
@@ -31,8 +39,8 @@
           </div>
         }
 
-        @if (errorMessage) {
-          <div class="error-banner">{{ errorMessage }}</div>
+        @if (errorMessage()) {
+          <div class="error-banner">{{ errorMessage() }}</div>
         }
 
         <!-- LOGIN -->
@@ -55,8 +63,8 @@
                   <span class="link-btn" (click)="goForgot()">Forgot password?</span>
                 </div>
               </div>
-              <button type="submit" class="btn-primary" [disabled]="loginForm.invalid || loading">
-                {{ loading ? 'Signing in…' : 'Sign in' }}
+              <button type="submit" class="btn-primary" [disabled]="loginForm.invalid || loading()">
+                {{ loading() ? 'Signing in…' : 'Sign in' }}
               </button>
               <div class="divider"><span>or</span></div>
               <button type="button" class="btn-secondary" (click)="showOtpHint()">Continue with mobile OTP</button>
@@ -98,8 +106,8 @@
                 </div>
                 <input [type]="passwordType" formControlName="password" placeholder="Minimum 8 characters" autocomplete="new-password" />
               </div>
-              <button type="submit" class="btn-primary" [disabled]="registerForm.invalid || loading">
-                {{ loading ? 'Creating account…' : 'Create account' }}
+              <button type="submit" class="btn-primary" [disabled]="registerForm.invalid || loading()">
+                {{ loading() ? 'Creating account…' : 'Create account' }}
               </button>
               <p class="terms-text">By continuing you agree to our <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a>.</p>
             </form>
@@ -111,14 +119,16 @@
           <div class="view-block">
             <span class="link-btn back-link" (click)="goLogin()">← Back to sign in</span>
             <h2>Reset your password</h2>
-            @if (!forgotSubmitted) {
+            @if (!forgotSubmitted()) {
               <p class="subtext">Enter your registered email and we'll send you a reset link.</p>
               <form [formGroup]="forgotForm" (ngSubmit)="onForgotSubmit()">
                 <div class="field">
-                  <label>Email or mobile</label>
-                  <input type="text" formControlName="identifier" placeholder="you@example.com" />
+                  <label>Email</label>
+                  <input type="email" formControlName="email" placeholder="you@example.com" autocomplete="email" />
                 </div>
-                <button type="submit" class="btn-primary" [disabled]="forgotForm.invalid">Send reset link</button>
+                <button type="submit" class="btn-primary" [disabled]="forgotForm.invalid || loading()">
+                  {{ loading() ? 'Sending…' : 'Send reset link' }}
+                </button>
               </form>
             } @else {
               <p class="subtext">If that account exists, we've sent reset instructions to it. Check your inbox shortly.</p>

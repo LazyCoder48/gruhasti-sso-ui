@@ -1,4 +1,13 @@
 <div class="dashboard-wrapper">
+  <button
+    type="button"
+    class="theme-toggle"
+    [title]="theme.dark() ? 'Switch to light mode' : 'Switch to dark mode'"
+    (click)="theme.toggle()"
+  >
+    <i [class]="theme.dark() ? 'pi pi-sun' : 'pi pi-moon'"></i>
+  </button>
+  <div class="dashboard-stack">
   <p-card class="dashboard-card">
     <ng-template pTemplate="header">
       <div class="dashboard-header">
@@ -7,28 +16,97 @@
       </div>
     </ng-template>
 
-    <div class="user-info">
-      <div class="info-row">
-        <span class="label">Email</span>
-        <span>{{ auth.user()?.email }}</span>
-      </div>
-      <div class="info-row">
-        <span class="label">Name</span>
-        <span>{{ auth.user()?.firstName }} {{ auth.user()?.lastName }}</span>
-      </div>
-      <div class="info-row">
-        <span class="label">Roles</span>
-        <div class="roles">
-          @for (role of auth.user()?.roles; track role) {
-            <p-tag [value]="role" [severity]="role === 'ADMIN' ? 'warn' : 'info'" />
-          }
+    @if (!editing()) {
+      <div class="user-info">
+        <div class="info-row">
+          <span class="label">Email</span>
+          <span>{{ auth.user()?.email }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Name</span>
+          <span>{{ auth.user()?.firstName }} {{ auth.user()?.lastName }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Mobile</span>
+          <span>{{ auth.user()?.mobile }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Address</span>
+          <span>{{ auth.user()?.flatNumber }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Roles</span>
+          <div class="roles">
+            @for (role of auth.user()?.roles; track role) {
+              <p-tag [value]="role" [severity]="role === 'ADMIN' ? 'warn' : 'info'" />
+            }
+          </div>
         </div>
       </div>
-    </div>
+    } @else {
+      @if (errorMessage()) {
+        <p class="edit-error">{{ errorMessage() }}</p>
+      }
+      <form [formGroup]="form" class="edit-form" (ngSubmit)="save()">
+        <div class="edit-field">
+          <label>First name</label>
+          <input type="text" formControlName="firstName" />
+        </div>
+        <div class="edit-field">
+          <label>Last name</label>
+          <input type="text" formControlName="lastName" />
+        </div>
+        <div class="edit-field">
+          <label>Mobile</label>
+          <input type="tel" formControlName="mobile" />
+        </div>
+        <div class="edit-field">
+          <label>Address</label>
+          <input type="text" formControlName="flatNumber" />
+        </div>
+      </form>
+    }
 
     <ng-template pTemplate="footer">
-      <p-button label="Sign out" icon="pi pi-sign-out" severity="secondary"
-                (onClick)="auth.logout()" />
+      @if (!editing()) {
+        <div class="footer-actions">
+          @if (auth.isAdmin()) {
+            <a routerLink="/admin/email-templates" class="admin-link">
+              <i class="pi pi-envelope"></i> Email templates
+            </a>
+          }
+          <p-button label="Edit profile" icon="pi pi-pencil" [outlined]="true" (onClick)="startEditing()" />
+          <p-button label="Sign out" icon="pi pi-sign-out" severity="secondary" (onClick)="auth.logout()" />
+        </div>
+      } @else {
+        <div class="footer-actions">
+          <p-button label="Cancel" severity="secondary" [outlined]="true" [disabled]="saving()" (onClick)="cancelEditing()" />
+          <p-button label="Save" [disabled]="form.invalid || saving()" (onClick)="save()" />
+        </div>
+      }
     </ng-template>
   </p-card>
+
+  <section class="app-launcher">
+    <h2 class="app-launcher-title">Your Gruhasti apps</h2>
+    <div class="app-launcher-grid">
+      <button type="button" class="app-tile" (click)="goToApp(pen2paperUrl)">
+        <span class="app-tile-icon"><i class="pi pi-pencil"></i></span>
+        <span class="app-tile-copy">
+          <span class="app-tile-name">Pen2Paper</span>
+          <span class="app-tile-desc">Stationery & art supplies</span>
+        </span>
+        <i class="pi pi-arrow-up-right app-tile-arrow"></i>
+      </button>
+      <button type="button" class="app-tile" (click)="goToApp(shuddhaUrl)">
+        <span class="app-tile-icon"><i class="pi pi-sparkles"></i></span>
+        <span class="app-tile-copy">
+          <span class="app-tile-name">Shuddha</span>
+          <span class="app-tile-desc">Ayurvedic wellness</span>
+        </span>
+        <i class="pi pi-arrow-up-right app-tile-arrow"></i>
+      </button>
+    </div>
+  </section>
+  </div>
 </div>

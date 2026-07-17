@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap');
-
 :host {
   display: block;
   min-height: 100vh;
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: var(--p2p-font-body);
 }
 
 .auth-shell {
@@ -12,7 +10,33 @@
   align-items: center;
   justify-content: center;
   padding: 32px 16px;
-  background: #E7E2DA;
+  background: var(--p2p-bg);
+  position: relative;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--p2p-border);
+  background: var(--p2p-surface-sunken);
+  color: var(--p2p-primary);
+  cursor: pointer;
+  z-index: 1;
+
+  i {
+    font-size: 15px;
+  }
+
+  &:hover {
+    background: var(--p2p-primary-tint);
+  }
 }
 
 .auth-card {
@@ -21,9 +45,9 @@
   display: flex;
   border-radius: 28px;
   overflow: hidden;
-  box-shadow: 0 40px 90px -34px rgba(150, 70, 40, 0.4);
-  border: 1px solid #EAD8C8;
-  background: #FBEEE3;
+  box-shadow: 0 40px 90px -34px rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--p2p-border);
+  background: var(--p2p-surface);
 }
 
 /* Brand panel */
@@ -31,8 +55,8 @@
   width: 48%;
   position: relative;
   padding: 52px;
-  background: radial-gradient(130% 120% at 20% 0%, #E07C4E, #C2542C 60%, #A5431F);
-  color: #FFF3EC;
+  background: var(--p2p-brand-gradient);
+  color: var(--p2p-inverse-text);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -44,33 +68,33 @@
     gap: 2px;
 
     .brand-name {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--p2p-font-display);
       font-weight: 600;
       font-size: 30px;
-      color: #FFF3EC;
+      color: var(--p2p-inverse-text);
     }
 
     .brand-tld {
-      font: 700 12px 'Hanken Grotesk';
-      color: #FBD9C7;
+      font: 700 12px var(--p2p-font-body);
+      color: var(--p2p-accent);
       margin-top: 4px;
     }
   }
 
   .brand-copy {
     h1 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--p2p-font-display);
       font-weight: 600;
       font-size: 38px;
       line-height: 1.1;
-      color: #FFF7F1;
+      color: var(--p2p-inverse-text);
       margin: 0 0 14px;
     }
 
     p {
       font-size: 15px;
       line-height: 1.6;
-      color: #FBDDCE;
+      color: var(--p2p-inverse-text);
       margin: 0;
       max-width: 38ch;
     }
@@ -90,10 +114,10 @@
       gap: 10px;
       font-size: 13.5px;
       font-weight: 500;
-      color: #FFF3EC;
+      color: var(--p2p-inverse-text);
 
       i {
-        color: #FBD9C7;
+        color: var(--p2p-accent);
         font-size: 15px;
       }
     }
@@ -103,7 +127,7 @@
 /* Form panel */
 .form-panel {
   width: 52%;
-  background: #FBEEE3;
+  background: var(--p2p-surface);
   padding: 48px 52px;
   display: flex;
   flex-direction: column;
@@ -121,21 +145,21 @@
   height: 48px;
   margin-bottom: 20px;
   border-radius: 15px;
-  background: linear-gradient(150deg, #E88A5E, #D9663B);
+  background: var(--p2p-brand-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--p2p-font-display);
   font-weight: 700;
   font-size: 24px;
-  color: #FFF3EC;
-  box-shadow: 0 10px 22px -8px rgba(200, 90, 50, 0.5);
+  color: var(--p2p-inverse-text);
+  box-shadow: 0 10px 22px -8px rgba(var(--p2p-primary-rgb), 0.5);
 }
 
 .segmented {
   position: relative;
   display: flex;
-  background: #F3E0D3;
+  background: var(--p2p-surface-alt);
   border-radius: 14px;
   padding: 5px;
   margin-bottom: 24px;
@@ -147,10 +171,10 @@
     bottom: 5px;
     left: 5px;
     width: calc(50% - 5px);
-    background: #FBF3EE;
-    border: 1px solid #F0DCCB;
+    background: var(--p2p-surface);
+    border: 1px solid var(--p2p-border);
     border-radius: 10px;
-    box-shadow: 0 2px 7px rgba(150, 70, 40, 0.13);
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.13);
     transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 
     &.right {
@@ -164,16 +188,16 @@
     padding: 9px;
     border: none;
     background: transparent;
-    font: 700 13px 'Hanken Grotesk';
-    color: #5E2A18;
+    font: 700 13px var(--p2p-font-body);
+    color: var(--p2p-text);
     cursor: pointer;
   }
 }
 
 .error-banner {
-  background: #FBE3DB;
-  border: 1px solid #EFC0AC;
-  color: #9A3E1E;
+  background: var(--p2p-danger-tint);
+  border: 1px solid var(--p2p-danger);
+  color: var(--p2p-danger);
   font-size: 13px;
   font-weight: 600;
   padding: 10px 14px;
@@ -183,10 +207,10 @@
 
 .view-block {
   h2 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--p2p-font-display);
     font-weight: 600;
     font-size: 28px;
-    color: #5E2A18;
+    color: var(--p2p-text);
     line-height: 1.05;
     margin: 0;
   }
@@ -194,7 +218,7 @@
   .subtext {
     font-size: 13.5px;
     line-height: 1.5;
-    color: #A0674A;
+    color: var(--p2p-text-muted);
     margin: 8px 0 22px;
   }
 }
@@ -211,30 +235,30 @@ form {
   gap: 6px;
 
   label {
-    font: 700 10px 'Hanken Grotesk';
+    font: 700 10px var(--p2p-font-body);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #BF8567;
+    color: var(--p2p-text-muted);
   }
 
   input {
     width: 100%;
     padding: 13px 15px;
-    border: 1.5px solid #F0DACA;
+    border: 1.5px solid var(--p2p-border);
     border-radius: 15px;
-    background: #FFF7F1;
-    font: 400 15px 'Hanken Grotesk';
-    color: #5E2A18;
+    background: var(--p2p-surface-sunken);
+    font: 400 15px var(--p2p-font-body);
+    color: var(--p2p-text);
     outline: none;
     transition: border-color 0.15s, box-shadow 0.15s;
 
     &::placeholder {
-      color: #C6A491;
+      color: var(--p2p-text-faint);
     }
 
     &:focus {
-      border-color: #D9663B;
-      box-shadow: 0 0 0 3px rgba(217, 102, 59, 0.14);
+      border-color: var(--p2p-primary);
+      box-shadow: 0 0 0 3px rgba(var(--p2p-primary-rgb), 0.14);
     }
   }
 }
@@ -252,8 +276,8 @@ form {
 }
 
 .link-btn {
-  font: 600 12px 'Hanken Grotesk';
-  color: #C96A3C;
+  font: 600 12px var(--p2p-font-body);
+  color: var(--p2p-primary-hover);
   cursor: pointer;
 
   &:hover {
@@ -275,15 +299,15 @@ form {
   padding: 15px;
   border: none;
   border-radius: 999px;
-  background: #D9663B;
-  color: #FFF3EC;
-  font: 700 14px 'Hanken Grotesk';
+  background: var(--p2p-primary);
+  color: var(--p2p-primary-contrast);
+  font: 700 14px var(--p2p-font-body);
   cursor: pointer;
-  box-shadow: 0 10px 20px -8px rgba(200, 90, 50, 0.55);
+  box-shadow: 0 10px 20px -8px rgba(var(--p2p-primary-rgb), 0.55);
   transition: background 0.15s;
 
   &:hover:not(:disabled) {
-    background: #C25730;
+    background: var(--p2p-primary-hover);
   }
 
   &:disabled {
@@ -295,17 +319,17 @@ form {
 .btn-secondary {
   width: 100%;
   padding: 14px;
-  border: 1.5px solid #EAD3C4;
+  border: 1.5px solid var(--p2p-border);
   border-radius: 999px;
   background: transparent;
-  color: #7A4A38;
-  font: 600 14px 'Hanken Grotesk';
+  color: var(--p2p-text-body);
+  font: 600 14px var(--p2p-font-body);
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
 
   &:hover {
-    border-color: #D9663B;
-    background: #FBEFE6;
+    border-color: var(--p2p-primary);
+    background: var(--p2p-primary-tint);
   }
 }
 
@@ -319,32 +343,32 @@ form {
     content: '';
     flex: 1;
     height: 1px;
-    background: #F0DACA;
+    background: var(--p2p-border);
   }
 
   span {
-    font: 600 10px 'Hanken Grotesk';
+    font: 600 10px var(--p2p-font-body);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #C6A491;
+    color: var(--p2p-text-faint);
   }
 }
 
 .hint-text {
   text-align: center;
   font-size: 12px;
-  color: #A0674A;
+  color: var(--p2p-text-muted);
   margin: 4px 0 0;
 }
 
 .terms-text {
   text-align: center;
-  font: 400 11px/1.5 'Hanken Grotesk';
-  color: #A0674A;
+  font: 400 11px/1.5 var(--p2p-font-body);
+  color: var(--p2p-text-muted);
   margin: 4px 0 0;
 
   a {
-    color: #C96A3C;
+    color: var(--p2p-primary-hover);
     font-weight: 600;
     text-decoration: none;
   }

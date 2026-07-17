@@ -53,6 +53,22 @@ export class AuthService {
     );
   }
 
+  forgotPassword(email: string): Observable<void> {
+    return this.http.post<void>(`${environment.apiBaseUrl}/auth/forgot-password`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<void> {
+    return this.http.post<void>(`${environment.apiBaseUrl}/auth/reset-password`, { token, newPassword });
+  }
+
+  updateProfile(payload: {
+    firstName: string; lastName: string; mobile: string; flatNumber: string;
+  }): Observable<AuthResponse> {
+    return this.http.put<AuthResponse>(`${environment.apiBaseUrl}/profile`, payload).pipe(
+      tap(res => this.store(res))
+    );
+  }
+
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);

@@ -3,21 +3,143 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--p2p-bg);
   padding: 1rem;
+  position: relative;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--p2p-border);
+  background: var(--p2p-surface-sunken);
+  color: var(--p2p-primary);
+  cursor: pointer;
+
+  i {
+    font-size: 15px;
+  }
+
+  &:hover {
+    background: var(--p2p-primary-tint);
+  }
+}
+
+.dashboard-stack {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .dashboard-card {
   width: 100%;
-  max-width: 480px;
 
   .dashboard-header {
     text-align: center;
     padding: 1.5rem 1.5rem 0;
 
     h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
-    p { color: #6b7280; font-size: 0.9rem; }
+    p { color: var(--p2p-text-muted); font-size: 0.9rem; }
   }
+}
+
+.app-launcher {
+  width: 100%;
+  background: var(--p2p-surface);
+  border: 1px solid var(--p2p-border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.app-launcher-title {
+  font: 700 0.8rem var(--p2p-font-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--p2p-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.app-launcher-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.app-tile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1.5px solid var(--p2p-border);
+  border-radius: 12px;
+  background: var(--p2p-surface-sunken);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--p2p-font-body);
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+
+  &:hover {
+    background: var(--p2p-primary-tint);
+    border-color: var(--p2p-primary-tint-border);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.app-tile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--p2p-primary-tint);
+  color: var(--p2p-primary);
+
+  i { font-size: 16px; }
+}
+
+.app-tile-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.app-tile-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--p2p-text);
+}
+
+.app-tile-desc {
+  font-size: 0.75rem;
+  color: var(--p2p-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-tile-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 13px;
+  color: var(--p2p-text-faint);
 }
 
 .user-info {
@@ -33,10 +155,71 @@
     .label {
       font-weight: 600;
       font-size: 0.85rem;
-      color: #6b7280;
+      color: var(--p2p-text-muted);
       min-width: 60px;
     }
   }
 
   .roles { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+}
+
+.edit-error {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: var(--p2p-danger);
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  label {
+    font: 700 10px var(--p2p-font-body);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--p2p-text-muted);
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid var(--p2p-border);
+    border-radius: 10px;
+    background: var(--p2p-surface-sunken);
+    font: 400 14px var(--p2p-font-body);
+    color: var(--p2p-text);
+    outline: none;
+
+    &:focus {
+      border-color: var(--p2p-primary);
+      box-shadow: 0 0 0 3px rgba(var(--p2p-primary-rgb), 0.14);
+    }
+  }
+}
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: auto;
+  font: 600 13px var(--p2p-font-body);
+  color: var(--p2p-text-muted);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--p2p-primary);
+  }
 }
